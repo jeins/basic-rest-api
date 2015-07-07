@@ -9,6 +9,7 @@
 
 namespace resapi\helper;
 
+use resapi\controller\ExpControllerDataCustomer;
 use resapi\Setup;
 
 class Routing {
@@ -18,6 +19,73 @@ class Routing {
      * @param Setup $app
      */
     public static function setupRouting(Setup $app){
+        $app->group(
+            '/v1',
+            function() use($app){
+                $controller = new ExpControllerDataCustomer($app);
 
+                ### GET REQUEST
+                $app->get(
+                    '/customers',
+                    function() use($controller){
+                        $controller->getCustomers();
+                    }
+                );
+                $app->get(
+                    '/customer/:ID_CUSTOMER',
+                    function($id_customer) use($controller){
+                        $controller->getCustomers($id_customer);
+                    }
+                );
+                $app->get(
+                    '/customer_items/:ID_CUSTOMER',
+                    function($id_customer) use($controller){
+                        $controller->getCustomerItems($id_customer);
+                    }
+                );
+                $app->get(
+                    '/customer/filterby',
+                    function() use($controller){
+                        $controller->filterCustomerBy();
+                    }
+                );
+                $app->get(
+                    '/customer_items/filterby',
+                    function() use($controller){
+                        $controller->filterCustomerItems();
+                    }
+                );
+
+                ### POST REQUEST
+                $app->post(
+                    '/customer',
+                    function() use($controller){
+                        $controller->addNewCustomer();
+                    }
+                );
+                $app->post(
+                    '/customer_items',
+                    function() use($controller){
+                        $controller->addCustomerItems();
+                    }
+                );
+
+                ### PUT REQUEST
+                $app->put(
+                    '/customer_items/:ID_CUSTOMER',
+                    function($id_customer) use($controller){
+                        $controller->changeCustomerData($id_customer);
+                    }
+                );
+
+                ### DELETE REQUEST
+                $app->delete(
+                    '/customer_items/:ID_CUSTOMER',
+                    function($id_customer) use($controller){
+                        $controller->removeCustomer($id_customer);
+                    }
+                );
+            }
+        );
     }
 }

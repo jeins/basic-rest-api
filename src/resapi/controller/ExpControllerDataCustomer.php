@@ -9,6 +9,27 @@
 
 namespace resapi\controller;
 
+use resapi\models\ExpModelDataCustomer;
+
 class ExpControllerDataCustomer extends BaseController{
 
+    private function getDB(){
+        return new ExpModelDataCustomer();
+    }
+
+    public function addNewCustomer(){}
+
+    public function changeCustomerData($id_customer){}
+
+    public function removeCustomer($id_customer){}
+
+    public function getCustomers($id_customer = 0){}
+
+    public function filterCustomerBy(){}
+
+    public function addCustomerItems(){}
+
+    public function getCustomerItems($id_customer){}
+
+    public function filterCustomerItems(){}
 }
