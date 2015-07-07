@@ -16,6 +16,10 @@ class ExpModelDataCustomer extends Model{
     protected $table = 'data_customer';
     protected $primaryKey = 'id_customer';
 
+    /**
+     * setup relationship between data_customer 1 .... * data_customer_items
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function infoItems(){
         return $this->hasMany('\resapi\models\ExpModelDataCustomerItems', $this->primaryKey);
     }
