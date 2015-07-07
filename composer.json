@@ -1,0 +1,22 @@
+{
+    "autoload": {
+        "psr-0": {
+            "resapi\\": "src/"
+        },
+        "classmpa": ["src/resapi/models"]
+    },
+    "minimum-stability": "stable",
+    "require-dev": {
+        "phpunit/phpunit": "3.7.*"
+    },
+    "require": {
+        "php": ">=5.5",
+        "slim/slim": "2.4.3",
+        "illuminate/database": "*",
+        "rhumsaa/uuid": "2.8"
+    },
+    "authors": [{
+        "name": "Muhammad Juan Akbar",
+        "email": "mail@mjuanakbar.info"
+    }]
+}
