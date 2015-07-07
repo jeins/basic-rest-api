@@ -1,0 +1,53 @@
+#!/usr/bin/env php
+<?php
+/*******************************************************
+ * Copyright (C) 2015 Muhammad Juan Akbar - All Rights Reserved
+ * Written by Muhammad Juan Akbar <mail@mjuanakbar.info>, 06 2015
+ *
+ * db can not be copied and/or distributed without the express
+ * permission of author.
+ *******************************************************/
+require __DIR__ . '/vendor/autoload.php';
+define("MIGRATIONS_PATH", __DIR__ . '/src/resapi/database/migrations');
+define("SEEDS_PATH", __DIR__ . '/src/resapi/database/seeds');
+class Database {
+    public function __construct($args){
+        $this->args = $args;
+        $setup = new \resapi\Setup();
+    }
+    public function run(){
+        if(count($this->args) <= 1){
+            $this->help();
+        } else{
+            switch($this->args[1]) {
+                case "migrate":
+                    $files = glob(MIGRATIONS_PATH . '/*.php');
+                    $this->doMigrateSeed($files, 'migrations');
+                    break;
+                case "seed":
+                    $files = glob(SEEDS_PATH . '/*.php');
+                    $this->doMigrateSeed($files, 'seeds');
+                    break;
+                case "help":
+                    $this->help();
+                    break;
+                case "md5":
+                    echo md5($this->args[2]);
+                    break;
+            }
+        }
+    }
+    private function help(){
+        echo "usage: php " . $this->args[0] . " <command> [migrate | seed]\n";
+    }
+    private function doMigrateSeed($files, $mode){
+        foreach($files as $file){
+            $class = "\\resapi\\database\\$mode\\".basename($file, '.php');
+            $object = new $class;
+            $object->run();
+            echo "do $mode for table: ".basename($file, '.php')."\n";
+        }
+    }
+}
+$db = new Database($argv);
+$db->run();
