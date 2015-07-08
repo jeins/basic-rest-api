@@ -20,10 +20,10 @@ class ExpMigrateDataCustomer {
         Capsule::schema()->dropIfExists('data_customer');
         Capsule::schema()->create('data_customer', function($table){
             $table->increments('id_customer');
+            $table->integer('id_auth');
             $table->string('full_name');
             $table->string('email');
-            $table->string('password');
-            $table->string('api_key');
+            $table->string('tlpn');
             $table->string('address');
             $table->timestamps();
         });

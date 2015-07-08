@@ -9,6 +9,7 @@
 
 namespace resapi;
 
+use resapi\helper\Routing;
 use Slim\Slim;
 
 
@@ -33,5 +34,7 @@ class Setup extends Slim{
         ));
         $capsule->setAsGlobal();
         $capsule->bootEloquent();
+
+        Routing::setupRouting($this);
     }
 } 

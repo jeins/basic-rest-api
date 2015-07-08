@@ -10,6 +10,7 @@
 namespace resapi\helper;
 
 use resapi\controller\ExpControllerDataCustomer;
+use resapi\libraries\APITokenAuth;
 use resapi\Setup;
 
 class Routing {
@@ -22,6 +23,13 @@ class Routing {
         $app->group(
             '/v1',
             function() use($app){
+                // CREATE API KEY
+                $app->post('/create-api-token', function() use($app){
+                    $token = new APITokenAuth($app);
+                    $token->createNewToken();
+                });
+
+                // SAMPLE REQUEST
                 $controller = new ExpControllerDataCustomer($app);
 
                 ### GET REQUEST

@@ -3,15 +3,16 @@
  * Copyright (C) 2015 Muhammad Juan Akbar - All Rights Reserved
  * Written by Muhammad Juan Akbar <mail@mjuanakbar.info>, 07 2015
  *
- * APIKeyManager.php can not be copied and/or distributed without the express
+ * APIKeyModel.php can not be copied and/or distributed without the express
  * permission of author.
  *******************************************************/
 
-namespace resapi\library;
+namespace resapi\models;
 
-use Rhumsaa\Uuid\Uuid;
+use Illuminate\Database\Eloquent\Model as Model;
 
-class APIKeyManager extends Base{
+class APITokenAuthModel extends Model{
 
-
+    protected $table = 'api_auth';
+    protected $primaryKey = 'id_auth';
 } 

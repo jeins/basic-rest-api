@@ -7,8 +7,7 @@
  * permission of author.
  *******************************************************/
 
-namespace resapi\library;
-
+namespace resapi\libraries;
 
 use resapi\Setup;
 
@@ -53,15 +52,6 @@ class Base {
     protected function writeToJSON($message, $statusCode = 200){
         $this->response->status($statusCode);
         $this->response['Content-Type'] = 'application/json';
-        $this->reponse->body(json_encode($message));
-    }
-
-    /**
-     * parsing error exception
-     * @param array $message
-     * @param int $statusCode
-     */
-    protected function writeException($message = ['errmsg' => 'service unavailable'], $statusCode = 503){
-        $this->writeToJSON($message, $statusCode);
+        $this->response->body(json_encode($message));
     }
 }

@@ -9,8 +9,8 @@
 
 namespace resapi\controller;
 
-use resapi\library\Base;
-use resapi\model\ExpModelDataCustomer;
+use resapi\libraries\Base;
+use resapi\models\ExpModelDataCustomer;
 
 class ExpControllerDataCustomer extends Base{
 
