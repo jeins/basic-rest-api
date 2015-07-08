@@ -7,7 +7,7 @@
  * permission of author.
  *******************************************************/
 
-namespace resapi\models;
+namespace resapi\model;
 
 use Illuminate\Database\Eloquent\Model as Model;
 

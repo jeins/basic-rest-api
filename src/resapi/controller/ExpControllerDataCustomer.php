@@ -9,9 +9,10 @@
 
 namespace resapi\controller;
 
-use resapi\models\ExpModelDataCustomer;
+use resapi\library\Base;
+use resapi\model\ExpModelDataCustomer;
 
-class ExpControllerDataCustomer extends BaseController{
+class ExpControllerDataCustomer extends Base{
 
     private function getDB(){
         return new ExpModelDataCustomer();

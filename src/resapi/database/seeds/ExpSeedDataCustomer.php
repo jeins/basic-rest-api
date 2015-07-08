@@ -9,7 +9,7 @@
 
 namespace resapi\database\seeds;
 
-use resapi\models\ExpModelDataCustomer;
+use resapi\model\ExpModelDataCustomer;
 
 class ExpSeedDataCustomer {
 
