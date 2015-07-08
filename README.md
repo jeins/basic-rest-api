@@ -42,7 +42,7 @@ Body:
 ```
 
 ## Auth By Request
-Header:
+Headers:
 ```
 Content-Type : application/json
 WWW-Authorization : base64(username/password)
