@@ -22,7 +22,7 @@ POST /create-api-token
 
 Headers: 
 ```
-Content-MD5: md5($stringContent.$clientSecret) 
+Content-Type : application/json
 ```
 
 Body: 
