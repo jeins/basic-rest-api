@@ -24,7 +24,7 @@ class ExpControllerDataCustomer extends Base{
 
     public function removeCustomer($id_customer){}
 
-    public function getCustomers($id_customer = 0){}
+    public function getCustomers($id_customer = 0){echo "OK";}
 
     public function filterCustomerBy(){}
 

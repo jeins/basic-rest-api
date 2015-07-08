@@ -9,6 +9,8 @@
 
 namespace resapi;
 
+use resapi\helper\MiddlewareAuthenticator;
+use resapi\helper\MiddlewareMediatype;
 use resapi\helper\Routing;
 use Slim\Slim;
 
@@ -34,6 +36,15 @@ class Setup extends Slim{
         ));
         $capsule->setAsGlobal();
         $capsule->bootEloquent();
+
+        // add middleware
+        $this->add(new MiddlewareMediatype());
+        $this->add(new MiddlewareAuthenticator());
+
+        // add error message
+        $this->notFound(function (){
+            echo json_encode(['errmsg' => 'Not Found Request']);
+        });
 
         Routing::setupRouting($this);
     }

@@ -16,7 +16,7 @@ class APITokenAuth extends Base{
 
     /**
      * get database connection
-     * @return APIKeyModel
+     * @return APITokenAuthModel
      */
     private function getDB(){
         return new APITokenAuthModel();
@@ -66,22 +66,26 @@ class APITokenAuth extends Base{
 
     /**
      * check if API-Key and WWW-Authorization valid
-     * @param $apiKey
+     * @param $token
      * @param $authentication
      * @return bool
      */
-    public function isApiKeyUserPassValid($apiKey, $authentication){
+    public function isApiKeyUserPassValid($token, $authentication){
         $auth = explode("/",base64_decode($authentication));
 
-        if(!Uuid::isValid($apiKey)){
-            $check = $this->getDB()->query()->where('username', '=', $auth[0])
-                ->where('password', '=', sha1($auth[1]))
-                ->where('token', '=', $apiKey)
-                ->get()->count();
-            if(!$check){
-                return false;
+        try{
+            if(Uuid::isValid($token)){
+                $check = $this->getDB()->query()->where('username', '=', $auth[0])
+                    ->where('password', '=', sha1($auth[1]))
+                    ->where('token', '=', $token)
+                    ->get()->count();
+                if(!$check){
+                    return false;
+                }
+                return true;
             }
-            return true;
+        } catch(\Exception $e){
+            $this->writeToJSON(['errmsg' => 'service unavailable'], 503);
         }
         return false;
     }
