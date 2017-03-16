@@ -13,20 +13,29 @@ class HomeController extends Controller {
     {
         parent::__construct($app);
 
-        $app->get('version/{name}', [$this, 'versionAction']);
+        $app->get('version', [$this, 'versionAction']);
         $app->post('hello', [$this, 'helloAction']);
     }
 
-    public function versionAction($request){
-        $this->validateRequest($request);
-
-        return $this->responseJson(['version' => '1.0']);
+    /**
+     * get version
+     * @return mixed
+     * @throws \RuntimeException
+     * @throws \InvalidArgumentException
+     * @internal param $request
+     */
+    public function versionAction(){
+        return $this->responseAsJson(['version' => '1.0']);
     }
 
+    /**
+     * @param $request
+     * @return mixed
+     */
     public function helloAction($request){
         $this->validateRequest($request);
 
         $body = $this->request->getParsedBody();
-        return $this->responseJson(['name' => 'ok', 'body' => $body]);
+        return $this->responseAsJson(['name' => 'ok', 'body' => $body]);
     }
 }

@@ -30,7 +30,7 @@ class Controller {
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
-    protected function responseJson($data)
+    protected function responseAsJson($data)
     {
         $params = [
             'success'   => true,
@@ -39,6 +39,18 @@ class Controller {
 
         return $this->response
             ->withStatus(200)
+            ->withJson($params);
+    }
+
+    protected function responseExceptionAsJson(\Exception $e)
+    {
+        $params = [
+            'success' => false,
+            'errorMessage'  => $e->getMessage()
+        ];
+
+        return $this->response
+            ->withStatus($e->getCode())
             ->withJson($params);
     }
 
