@@ -5,10 +5,6 @@ namespace App\Controllers;
 use App\Models\Product;
 
 class ProductController extends Controller {
-    /**
-     * @var Product
-     */
-    private $product;
 
     /**
      * ProductController constructor.
@@ -19,9 +15,7 @@ class ProductController extends Controller {
     {
         parent::__construct($app);
 
-        $this->product = new Product();
-
-        $app->get('list', [$this, 'getListAction']);
+        $app->get('/list', [$this, 'getListAction']);
     }
 
     /**
@@ -31,7 +25,7 @@ class ProductController extends Controller {
      */
     public function getListAction(){
         try{
-            return $this->responseAsJson($this->product->getAll());
+            return $this->responseAsJson(Product::getAll());
         } catch (\Exception $e) {
            return $this->responseExceptionAsJson($e);
         }

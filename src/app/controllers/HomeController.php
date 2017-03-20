@@ -13,8 +13,8 @@ class HomeController extends Controller {
     {
         parent::__construct($app);
 
-        $app->get('version', [$this, 'versionAction']);
-        $app->post('hello', [$this, 'helloAction']);
+        $app->get('/version', [$this, 'versionAction']);
+        $app->post('/hello', [$this, 'helloAction']);
     }
 
     /**
@@ -31,6 +31,8 @@ class HomeController extends Controller {
     /**
      * @param $request
      * @return mixed
+     * @throws \InvalidArgumentException
+     * @throws \RuntimeException
      */
     public function helloAction($request){
         $this->validateRequest($request);

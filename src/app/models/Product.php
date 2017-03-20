@@ -2,16 +2,15 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model as Model;
+use Illuminate\Database\Eloquent\Model;
 
-class Product extends Model{
+class Product extends Model {
 
-    /**
-     * @var string
-     */
     protected $table = 'products';
 
-    public function getAll(){
+    public $timestamps = false;
+
+    public static function getAll(){
         return self::all();
     }
 

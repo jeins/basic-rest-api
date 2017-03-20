@@ -4,6 +4,7 @@ namespace App;
 
 use Slim\App;
 use App\Middleware\MediaType;
+use Illuminate\Database\Capsule\Manager as Capsule;
 
 class Setup extends App{
 
@@ -33,15 +34,11 @@ class Setup extends App{
     private function loadDependenciesInjection(){
         $container = $this->getContainer();
 
-        $container['db'] = function($c){
-            $capsule = new \Illuminate\Database\Capsule\Manager;
-            $capsule->addConnection($c['settings']['db']);
-
-            $capsule->setAsGlobal();
-            $capsule->bootEloquent();
-
-            return $capsule;
-        };
+        //Database
+        $capsule = new Capsule;
+        $capsule->addConnection($container['settings']['db']);
+        $capsule->setAsGlobal();
+        $capsule->bootEloquent();
     }
 
     /**
@@ -60,7 +57,8 @@ class Setup extends App{
 
                 if (in_array($className, $exceptClass, true)) continue;
 
-                $this->group('/', function () use ($className) {
+                $groupFromClassName = str_replace('controller', '', strtolower($className));
+                $this->group('/' . $groupFromClassName, function () use ($className) {
                     $fullClassName = "\\App\\Controllers\\" . $className;
                     new $fullClassName($this);
                 });

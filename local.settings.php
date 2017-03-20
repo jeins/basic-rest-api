@@ -8,10 +8,10 @@ return [
 
         'db' => [
             'driver' => 'mysql',
-            'host' => 'sql8.freemysqlhosting.net',
-            'database' => 'sql8164157',
-            'username' => 'sql8164157',
-            'password' => 'mQCUtZXK1I',
+            'host' => 'localhost',
+            'database' => 'api',
+            'username' => 'root',
+            'password' => 'root',
             'charset'   => 'utf8',
             'collation' => 'utf8_unicode_ci',
             'prefix'    => '',
