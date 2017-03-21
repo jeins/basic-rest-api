@@ -16,6 +16,10 @@ class ProductController extends Controller {
         parent::__construct($app);
 
         $app->get('/list', [$this, 'getListAction']);
+        $app->get('/{id}', [$this, 'getByIdAction']);
+        $app->post('/', [$this, 'postAction']);
+        $app->put('/{id}', [$this, 'putAction']);
+        $app->delete('/{id}', [$this, 'deleteAction']);
     }
 
     /**
@@ -30,4 +34,21 @@ class ProductController extends Controller {
            return $this->responseExceptionAsJson($e);
         }
     }
+
+    public function getByIdAction(){}
+
+    public function postAction($request){
+        try{
+            $this->validateRequest($request);
+
+            $body = $this->request->getParsedBody();
+            return Product::insert($body);
+        } catch (\Exception $e) {
+            return $this->responseExceptionAsJson($e);
+        }
+    }
+
+    public function putAction(){}
+
+    public function deleteAction(){}
 }
